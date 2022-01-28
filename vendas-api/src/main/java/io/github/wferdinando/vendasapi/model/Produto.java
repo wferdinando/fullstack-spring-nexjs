@@ -1,12 +1,14 @@
 package io.github.wferdinando.vendasapi.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,6 +26,8 @@ public class Produto {
     private BigDecimal preco;
     @Column(name = "sku", length = 20)
     private String sku;
+    @Column(name = "data_cadastro")
+    private LocalDate dataCadastro;
 
     public Produto() {
         super();
@@ -34,6 +38,19 @@ public class Produto {
         this.descricao = descricao;
         this.preco = preco;
         this.sku = sku;
+    }
+
+    public Produto(Long id, String nome, String descricao, BigDecimal preco, String sku) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.sku = sku;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        setDataCadastro(LocalDate.now());
     }
 
     public Long getId() {
@@ -76,6 +93,14 @@ public class Produto {
         this.sku = sku;
     }
 
+    public LocalDate getDataCadastro() {
+        return this.dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -84,6 +109,7 @@ public class Produto {
                 ", descricao='" + getDescricao() + "'" +
                 ", preco='" + getPreco() + "'" +
                 ", sku='" + getSku() + "'" +
+                ", dataCadastro='" + getDataCadastro() + "'" +
                 "}";
     }
 
