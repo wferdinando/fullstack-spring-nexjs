@@ -29,7 +29,6 @@ export const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
                                         props.mensagens &&
                                         props.mensagens.map(msg => <Message key={msg.texto} {...msg} />)
                                     }
-
                                     {props.children}
                                 </div>
                             </div>

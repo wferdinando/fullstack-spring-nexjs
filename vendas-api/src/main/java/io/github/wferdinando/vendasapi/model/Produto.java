@@ -34,24 +34,27 @@ public class Produto {
     }
 
     public Produto(String nome, String descricao, BigDecimal preco, String sku) {
-        this.nome = nome;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.sku = sku;
-    }
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.sku = sku;
+	}
 
-    public Produto(Long id, String nome, String descricao, BigDecimal preco, String sku) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.sku = sku;
-    }
+    public Produto(Long id, String nome, String descricao, BigDecimal preco, String sku, LocalDate dataCadastro){
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.sku = sku;
+        this.dataCadastro = dataCadastro;
+	}
 
     @PrePersist
-    public void prePersist() {
-        setDataCadastro(LocalDate.now());
-    }
+	public void prePersist() {
+		setDataCadastro(LocalDate.now());
+	}
 
     public Long getId() {
         return this.id;
@@ -94,12 +97,13 @@ public class Produto {
     }
 
     public LocalDate getDataCadastro() {
-        return this.dataCadastro;
-    }
+		return dataCadastro;
+	}
 
-    public void setDataCadastro(LocalDate dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
+	public void setDataCadastro(LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
 
     @Override
     public String toString() {
